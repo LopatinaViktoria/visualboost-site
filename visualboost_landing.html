@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VisualBoost — Карточка, по которой хочется кликнуть</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-cover bg-center" style="background-image: url('caver%20(1).png');">
+    <img src="Group%203.png" alt="VisualBoost Logo" class="w-48 h-auto mb-6">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Карточка, которую хочется кликнуть</h1>
+    <p class="text-xl md:text-2xl mb-6 max-w-2xl">VisualBoost помогает Amazon-селлерам понять, какой визуал реально работает. Тестируйте карточки, получайте фидбэк и улучшайте CTR — без догадок.</p>
+    <a href="#signup" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-xl text-lg shadow">Протестировать мою карточку</a>
+  </section>
+
+  <!-- Problem + Solution -->
+  <section class="py-16 px-6 max-w-5xl mx-auto">
+    <h2 class="text-3xl font-semibold mb-6 text-center">Если ты — селлер с 1–3 товарами, это для тебя</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl font-bold mb-2">❌ Что мешает тебе продавать?</h3>
+        <ul class="list-disc list-inside text-lg text-gray-700">
+          <li>CTR падает, а ты не понимаешь, почему</li>
+          <li>Фото красивые, но не продают</li>
+          <li>Ты не знаешь, какой вариант лучше — и тратишь на рекламу вслепую</li>
+          <li>Боишься получить бан за нарушения ToS</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-2">✅ Что даст тебе VisualBoost</h3>
+        <ul class="list-disc list-inside text-lg text-gray-700">
+          <li>Симуляция A/B теста визуалов карточки</li>
+          <li>Фидбэк от реальных покупателей</li>
+          <li>Подсветка ошибок и триггеров блокировки</li>
+          <li>Шаблоны и примеры карточек, которые реально работают</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preview Section -->
+  <section class="py-12 px-6 bg-gray-100">
+    <h2 class="text-3xl font-semibold mb-6 text-center">Как работает VisualBoost</h2>
+    <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+      <img src="https://via.placeholder.com/500x300?text=VisualBoost+Sandbox" alt="Visual Sandbox preview" class="rounded-xl shadow-xl" />
+      <div class="max-w-md">
+        <p class="text-lg text-gray-700">Загрузи свою карточку → выбери 2 варианта → получи аналитику, какой даст больше кликов. Всё просто и по делу.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Email Signup -->
+  <section id="signup" class="py-16 px-6 text-center">
+    <h2 class="text-3xl font-semibold mb-4">Протестируй сейчас</h2>
+    <p class="mb-6 text-lg">Оставь email — мы пришлём инструкцию и шаблон. Первый тест — бесплатно.</p>
+    <form action="https://formspree.io/f/xjkrzbja" method="POST" class="max-w-xl mx-auto">
+  <input type="hidden" name="_replyto">
+  <input type="hidden" name="_subject" value="Новая заявка с сайта VisualBoost">
+  <input type="hidden" name="_format" value="plain">
+  <input type="email" name="email" placeholder="Ваш e-mail" class="border border-gray-300 px-4 py-3 rounded-l-xl w-2/3" required>
+  <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-r-xl font-semibold">Получить доступ</button>
+</form>
+  </section>
+
+  <footer class="py-8 text-center text-sm text-gray-500">
+    © 2025 VisualBoost. Все права защищены.
+  </footer>
+</body>
+</html>
