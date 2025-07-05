@@ -68,44 +68,26 @@
   <section id="signup" class="py-16 px-6 text-center">
     <h2 class="text-3xl font-semibold mb-4">Протестируй сейчас</h2>
     <p class="mb-6 text-lg">Оставь email — мы пришлём инструкцию и шаблон. Первый тест — бесплатно.</p>
-    <form id="signup-form" action="https://formspree.io/f/your_form_id_here" method="POST" class="max-w-xl mx-auto">
-      <input type="email" name="email" placeholder="Ваш e-mail" class="border border-gray-300 px-4 py-3 rounded-l-xl w-2/3" required>
-      <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-r-xl font-semibold">Получить доступ</button>
-      <p id="form-status" class="text-green-600 mt-4 hidden"></p>
+    <form action="https://formspree.io/f/xjkrzbja" method="POST" class="max-w-xl mx-auto bg-white p-6 rounded-xl">
+      <input
+        type="email"
+        name="email"
+        placeholder="Ваш email"
+        class="form-input mb-3 px-4 py-2 rounded-xl w-full border border-gray-300"
+        required
+      />
+      <input type="hidden" name="_redirect" value="/thank-you.html" />
+      <button
+        type="submit"
+        class="text-white bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-xl w-full mt-3 transition duration-200"
+      >
+        Получить доступ
+      </button>
     </form>
   </section>
 
   <footer class="py-8 text-center text-sm text-gray-500">
     © 2025 VisualBoost. Все права защищены.
   </footer>
-  <script>
-    const form = document.getElementById('signup-form');
-    const status = document.getElementById('form-status');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = { email: form.email.value };
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
-        if (res.ok) {
-          status.textContent = 'Спасибо! Мы скоро свяжемся с вами.';
-          status.classList.remove('hidden');
-          form.reset();
-        } else {
-          status.textContent = 'Ошибка при отправке формы.';
-          status.classList.remove('hidden');
-        }
-      } catch (err) {
-        status.textContent = 'Ошибка сети. Попробуйте позже.';
-        status.classList.remove('hidden');
-      }
-    });
-  </script>
 </body>
 </html>
