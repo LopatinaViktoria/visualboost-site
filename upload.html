@@ -8,7 +8,24 @@
 </head>
 <body class="bg-white text-gray-900 font-sans p-8">
   <h1 class="text-3xl font-bold mb-4">Upload</h1>
-  <p>Эта страница пока находится в разработке.</p>
-  <p><a href="/" class="text-purple-600 hover:underline">Вернуться на главную</a></p>
+  <form action="https://formspree.io/f/xjkrzbja" method="POST" enctype="multipart/form-data" class="space-y-4">
+    <div>
+      <label for="clientEmail" class="block mb-1">Ваш email:</label>
+      <input type="email" name="clientEmail" id="clientEmail" required class="w-full border rounded p-2">
+    </div>
+    <div>
+      <label for="cardA" class="block mb-1">Карточка A:</label>
+      <input type="file" name="cardA" id="cardA" accept="image/*" required class="w-full">
+    </div>
+    <div>
+      <label for="cardB" class="block mb-1">Карточка B:</label>
+      <input type="file" name="cardB" id="cardB" accept="image/*" required class="w-full">
+    </div>
+    <input type="hidden" name="_redirect" value="/thank-you.html">
+    <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">
+      Загрузить карточки
+    </button>
+  </form>
+  <p class="mt-4"><a href="/" class="text-purple-600 hover:underline">Вернуться на главную</a></p>
 </body>
 </html>
