@@ -22,14 +22,6 @@
       <input type="email" id="email" required class="w-full border rounded p-2">
     </div>
     <div>
-      <label for="survey" class="block mb-1">Ответ на опрос:</label>
-      <textarea id="survey" required class="w-full border rounded p-2"></textarea>
-    </div>
-    <div>
-      <label for="audience" class="block mb-1">Целевая аудитория:</label>
-      <input type="text" id="audience" required class="w-full border rounded p-2">
-    </div>
-    <div>
       <label for="cardA" class="block mb-1">Карта A:</label>
       <input type="file" id="cardA" accept="image/*" required class="w-full">
     </div>
@@ -54,9 +46,7 @@
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
-      const survey = document.getElementById('survey').value.trim();
       const cardA = document.getElementById('cardA').files[0];
-      const audience = document.getElementById("audience").value.trim();
       const cardB = document.getElementById('cardB').files[0];
       const message = document.getElementById('message');
       message.classList.add('hidden');
@@ -72,22 +62,20 @@
             fields: {
               fldaUiQ39NYvxUMcVysXUc: name,
               flduf4AsnhGYBbihrYBBihr: email,
-              fldNewmetaECo8cDCx: survey,
               fldpA6ksdc76ODrDft: [{ url: cardAUrl }],
-              fld123AudienceExampleId: audience,
               fldJ5vvb0DHnNwvrdK: [{ url: cardBUrl }]
             }
           }]
         };
 
-        const resp = await fetch('https://api.airtable.com/v0/appE0enoPi7oPUy5g/tbl5GTrO0C8kYtIuz', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer patvJS0DnoqPhKvNn.447d13a744908303e6e26d5434e55c96604325f7f1649618f89ac29749179235'
-          },
-          body: JSON.stringify(payload)
-        });
+          const resp = await fetch('https://api.airtable.com/v0/appE0enoPi7oPUy5g/tbl5GTrO0C8kYtIuz', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer VisualBoostToken'
+            },
+            body: JSON.stringify(payload)
+          });
 
         if (!resp.ok) throw new Error('Request failed');
 
