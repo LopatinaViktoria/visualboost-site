@@ -10,16 +10,20 @@
   <h1 class="text-3xl font-bold mb-4">Отправить данные клиента</h1>
   <form id="clientForm" class="space-y-4">
     <div>
-      <label for="clientName" class="block mb-1">Имя:</label>
-      <input type="text" id="clientName" required class="w-full border rounded p-2">
+      <label for="name" class="block mb-1">Имя:</label>
+      <input type="text" id="name" required class="w-full border rounded p-2">
     </div>
     <div>
-      <label for="clientEmail" class="block mb-1">Email:</label>
-      <input type="email" id="clientEmail" required class="w-full border rounded p-2">
+      <label for="email" class="block mb-1">Email:</label>
+      <input type="email" id="email" required class="w-full border rounded p-2">
     </div>
     <div>
-      <label for="clientSurvey" class="block mb-1">Ответ на опрос:</label>
-      <textarea id="clientSurvey" required class="w-full border rounded p-2"></textarea>
+      <label for="survey" class="block mb-1">Ответ на опрос:</label>
+      <textarea id="survey" required class="w-full border rounded p-2"></textarea>
+    </div>
+    <div>
+      <label for="audience" class="block mb-1">Целевая аудитория:</label>
+      <input type="text" id="audience" required class="w-full border rounded p-2">
     </div>
     <div>
       <label for="cardA" class="block mb-1">Карта A:</label>
@@ -34,32 +38,29 @@
   <p id="message" class="mt-4 text-green-600 hidden">Данные успешно отправлены!</p>
 
   <script>
-    async function uploadToCloudinary(file) {
-      const data = new FormData();
-      data.append('file', file);
-      data.append('upload_preset', 'YOUR_UPLOAD_PRESET');
-      const res = await fetch('https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload', {
-        method: 'POST',
-        body: data
+    function readFileAsDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
       });
-      const json = await res.json();
-      return json.secure_url;
     }
-
     document.getElementById('clientForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('clientName').value.trim();
-      const email = document.getElementById('clientEmail').value.trim();
-      const survey = document.getElementById('clientSurvey').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const survey = document.getElementById('survey').value.trim();
       const cardA = document.getElementById('cardA').files[0];
+      const audience = document.getElementById("audience").value.trim();
       const cardB = document.getElementById('cardB').files[0];
       const message = document.getElementById('message');
       message.classList.add('hidden');
 
       try {
         const [cardAUrl, cardBUrl] = await Promise.all([
-          uploadToCloudinary(cardA),
-          uploadToCloudinary(cardB)
+          readFileAsDataUrl(cardA),
+          readFileAsDataUrl(cardB)
         ]);
 
         const payload = {
@@ -69,6 +70,7 @@
               flduf4AsnhGYBbihrYBBihr: email,
               fldNewmetaECo8cDCx: survey,
               fldpA6ksdc76ODrDft: [{ url: cardAUrl }],
+              fld123AudienceExampleId: audience,
               fldJ5vvb0DHnNwvrdK: [{ url: cardBUrl }]
             }
           }]
@@ -78,7 +80,7 @@
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer YOUR_AIRTABLE_TOKEN'
+            'Authorization': 'Bearer patvJS0DnoqPhKvNn.447d13a744908303e6e26d5434e55c96604325f7f1649618f89ac29749179235'
           },
           body: JSON.stringify(payload)
         });
