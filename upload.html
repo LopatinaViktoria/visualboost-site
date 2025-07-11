@@ -8,50 +8,124 @@
 </head>
 <body class="bg-white text-gray-900 font-sans p-8">
   <h1 class="text-3xl font-bold mb-4">Отправить данные клиента</h1>
-  <div class="mb-6 space-y-2">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOaCruM81fYsHhjloq404dgncmXi75IqefqTZL-ASdfYQmsQ/viewform" target="_blank" rel="noopener" class="block text-purple-600 hover:underline">Форма ЦА</a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfVNbYNFirKpuGeiXUTPWNT8WVBulnpS1wSG0a4LNKx5z4iyg/viewform" target="_blank" rel="noopener" class="block text-purple-600 hover:underline">Форма Бриф</a>
-  </div>
-  <form id="clientForm" class="space-y-4">
-    <div>
-      <label for="name" class="block mb-1">Имя:</label>
-      <input type="text" id="name" required class="w-full border rounded p-2">
-    </div>
-    <div>
-      <label for="email" class="block mb-1">Email:</label>
-      <input type="email" id="email" required class="w-full border rounded p-2">
-    </div>
-    <div>
-      <label for="audience" class="block mb-1">Целевая аудитория:</label>
-      <input type="text" id="audience" required class="w-full border rounded p-2">
-    </div>
-    <div>
-      <label for="survey" class="block mb-1">Ответ на опрос:</label>
-      <textarea id="survey" required class="w-full border rounded p-2"></textarea>
-    </div>
-    <div>
-      <label for="cardA" class="block mb-1">Карта A:</label>
-      <input type="file" id="cardA" accept="image/*" required class="w-full border rounded p-2">
-    </div>
-    <div>
-      <label for="cardB" class="block mb-1">Карта B:</label>
-      <input type="file" id="cardB" accept="image/*" required class="w-full border rounded p-2">
-    </div>
+  <form id="clientForm" class="space-y-6">
+    <section>
+      <h2 class="text-xl font-bold mb-2">Контактные данные</h2>
+      <div class="mb-4">
+        <label for="name" class="block mb-1">Имя:</label>
+        <input type="text" id="name" required class="w-full border rounded p-2">
+      </div>
+      <div class="mb-4">
+        <label for="email" class="block mb-1">Email:</label>
+        <input type="email" id="email" required class="w-full border rounded p-2">
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold mb-2">Целевая аудитория</h2>
+      <div class="mb-4">
+        <label for="ca1" class="block mb-1">Кто чаще всего покупает твой товар?</label>
+        <textarea id="ca1" required class="w-full border rounded p-2"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="ca2" class="block mb-1">Примерный возраст аудитории? (можно выбрать несколько вариантов ответа)</label>
+        <textarea id="ca2" required class="w-full border rounded p-2"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="ca3" class="block mb-1">Есть ли у них дети?</label>
+        <textarea id="ca3" required class="w-full border rounded p-2"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="ca4" class="block mb-1">Где они живут?</label>
+        <textarea id="ca4" required class="w-full border rounded p-2"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="ca5" class="block mb-1">Что для них важно при покупке? (можно несколько вариантов)</label>
+        <textarea id="ca5" required class="w-full border rounded p-2"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="ca6" class="block mb-1">Насколько для них важен дизайн/визуал?</label>
+        <textarea id="ca6" required class="w-full border rounded p-2"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="ca7" class="block mb-1">Опиши своего идеального покупателя:</label>
+        <textarea id="ca7" required class="w-full border rounded p-2"></textarea>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold mb-2">Бриф</h2>
+      <div class="mb-4">
+        <label for="br1" class="block mb-1">Название продукта (например: "Силиконовые контейнеры для еды")</label>
+        <input type="text" id="br1" required class="w-full border rounded p-2">
+      </div>
+      <div class="mb-4">
+        <label for="br2" class="block mb-1">Категория на Amazon (Kitchen, Toys, Electronics и т.д.)</label>
+        <input type="text" id="br2" required class="w-full border rounded p-2">
+      </div>
+      <div class="mb-4">
+        <label for="br3" class="block mb-1">Основные преимущества продукта (например: "Без BPA", "Многоразовый")</label>
+        <textarea id="br3" required class="w-full border rounded p-2"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="br4" class="block mb-1">На чем хочешь сделать акцент в карточке? (можно выбрать несколько из списка)</label>
+        <textarea id="br4" required class="w-full border rounded p-2"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="br5" class="block mb-1">Есть ли у карточки “герой” (человек, ребёнок, семья)?</label>
+        <textarea id="br5" required class="w-full border rounded p-2"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="br6" class="block mb-1">Что важно понять этим тестом? (краткий ответ)</label>
+        <textarea id="br6" required class="w-full border rounded p-2"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="br7" class="block mb-1">Есть ли примеры или стили, на которые ты ориентируешься? (ссылки или описания)</label>
+        <textarea id="br7" required class="w-full border rounded p-2"></textarea>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold mb-2">Загрузка карточек</h2>
+      <div class="mb-4">
+        <label for="cardA" class="block mb-1">Карточка A:</label>
+        <input type="file" id="cardA" accept="image/*" required class="w-full border rounded p-2">
+      </div>
+      <div class="mb-4">
+        <label for="cardB" class="block mb-1">Карточка B:</label>
+        <input type="file" id="cardB" accept="image/*" required class="w-full border rounded p-2">
+      </div>
+    </section>
+
     <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">Отправить</button>
   </form>
-  <p id="message" class="mt-4 text-green-600 hidden">Данные успешно отправлены!</p>
+  <p id="message" class="mt-4 hidden"></p>
 
   <script>
     document.getElementById('clientForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const audience = document.getElementById('audience').value.trim();
-      const survey = document.getElementById('survey').value.trim();
+      const form = e.target;
+      const get = id => document.getElementById(id).value.trim();
+      const name = get('name');
+      const email = get('email');
+      const ca1 = get('ca1');
+      const ca2 = get('ca2');
+      const ca3 = get('ca3');
+      const ca4 = get('ca4');
+      const ca5 = get('ca5');
+      const ca6 = get('ca6');
+      const ca7 = get('ca7');
+      const br1 = get('br1');
+      const br2 = get('br2');
+      const br3 = get('br3');
+      const br4 = get('br4');
+      const br5 = get('br5');
+      const br6 = get('br6');
+      const br7 = get('br7');
       const cardAFile = document.getElementById('cardA').files[0];
       const cardBFile = document.getElementById('cardB').files[0];
       const message = document.getElementById('message');
-      message.classList.add('hidden');
+      message.className = 'mt-4 hidden';
 
       const token = 'patvJS0DnoqPhKvNn.447d13a744908303e6e26d5434e55c96604325f7f1649618f89ac29749179235';
       const baseId = 'appE0enoPi7oPUy5g';
@@ -70,17 +144,32 @@
       }
 
       try {
-        const [aData, bData] = await Promise.all([uploadAttachment(cardAFile), uploadAttachment(cardBFile)]);
+        const [aData, bData] = await Promise.all([
+          uploadAttachment(cardAFile),
+          uploadAttachment(cardBFile)
+        ]);
 
         const payload = {
           records: [{
             fields: {
-              flduaiQi39NYvxlwCvxMC: name,
-              flduf4asnHGyBBihr: email,
-              jJhi16cs: audience,
-              fldWewtaECoe8CDcx: survey,
-              fldPa6ksdc76ODrDft: [{ url: aData.url }],
-              fldJSvvb0DHnwvrdK: [{ url: bData.url }]
+              'Имя': name,
+              'Email': email,
+              'Кто чаще всего покупает твой товар?': ca1,
+              'Примерный возраст аудитории? (можно выбрать несколько вариантов ответа)': ca2,
+              'Есть ли у них дети?': ca3,
+              'Где они живут?': ca4,
+              'Что для них важно при покупке? (можно несколько вариантов)': ca5,
+              'Насколько для них важен дизайн/визуал?': ca6,
+              'Опиши своего идеального покупателя:': ca7,
+              'Название продукта': br1,
+              'Категория на Amazon': br2,
+              'Основные преимущества продукта': br3,
+              'На чем хочешь сделать акцент в карточке? (можно выбрать несколько из списка)': br4,
+              'Есть ли у карточки “герой” (человек, ребёнок, семья)?': br5,
+              'Что важно понять этим тестом? (краткий ответ)': br6,
+              'Есть ли примеры или стили, на которые ты ориентируешься? (ссылки или описания)': br7,
+              'Карточка A': [{ url: aData.url }],
+              'Карточка B': [{ url: bData.url }]
             }
           }]
         };
@@ -97,13 +186,11 @@
         if (!resp.ok) throw new Error('Request failed');
 
         message.textContent = 'Данные успешно отправлены!';
-        message.classList.remove('hidden');
-        e.target.reset();
+        message.className = 'mt-4 text-green-600';
+        form.reset();
       } catch (err) {
         message.textContent = 'Ошибка при отправке данных';
-        message.classList.remove('text-green-600');
-        message.classList.add('text-red-600');
-        message.classList.remove('hidden');
+        message.className = 'mt-4 text-red-600';
       }
     });
   </script>
