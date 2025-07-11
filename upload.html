@@ -40,8 +40,8 @@
         <textarea id="interests" class="w-full border rounded p-2"></textarea>
       </div>
       <div class="mb-4">
-        <label for="geo" class="block mb-1">География</label>
-        <textarea id="geo" class="w-full border rounded p-2"></textarea>
+        <label for="location" class="block mb-1">География</label>
+        <textarea id="location" class="w-full border rounded p-2"></textarea>
       </div>
     </section>
 
@@ -64,20 +64,20 @@
         <textarea id="tone" class="w-full border rounded p-2"></textarea>
       </div>
       <div class="mb-4">
-        <label for="brand" class="block mb-1">Характер бренда</label>
-        <textarea id="brand" class="w-full border rounded p-2"></textarea>
+        <label for="brand_character" class="block mb-1">Характер бренда</label>
+        <textarea id="brand_character" class="w-full border rounded p-2"></textarea>
       </div>
     </section>
 
     <section>
       <h2 class="text-xl font-bold mb-2">Загрузка карточек</h2>
       <div class="mb-4">
-        <label for="cardA" class="block mb-1">Карточка A</label>
-        <input type="file" id="cardA" name="cardA" accept="image/*" required class="w-full border rounded p-2">
+        <label for="card_a" class="block mb-1">Карточка A</label>
+        <input type="file" id="card_a" name="card_a" accept="image/*" required class="w-full border rounded p-2">
       </div>
       <div class="mb-4">
-        <label for="cardB" class="block mb-1">Карточка B</label>
-        <input type="file" id="cardB" name="cardB" accept="image/*" required class="w-full border rounded p-2">
+        <label for="card_b" class="block mb-1">Карточка B</label>
+        <input type="file" id="card_b" name="card_b" accept="image/*" required class="w-full border rounded p-2">
       </div>
     </section>
 
@@ -97,15 +97,15 @@
       const age = get('age');
       const income = get('income');
       const interests = get('interests');
-      const geo = get('geo');
+      const locationVal = get('location');
       const product = get('product');
       const competitors = get('competitors');
       const goal = get('goal');
       const tone = get('tone');
-      const brand = get('brand');
+      const brand_character = get('brand_character');
 
-      const cardAFile = document.getElementById('cardA').files[0];
-      const cardBFile = document.getElementById('cardB').files[0];
+      const cardAFile = document.getElementById('card_a').files[0];
+      const cardBFile = document.getElementById('card_b').files[0];
       const message = document.getElementById('message');
       message.className = 'mt-4 hidden';
 
@@ -134,20 +134,20 @@
         const payload = {
           records: [{
             fields: {
-              'Имя клиента': name,
-              'Email': email,
-              'Пол клиента': gender,
-              'Возраст': age,
-              'Доход': income,
-              'Интересы': interests,
-              'География': geo,
-              'Продукт': product,
-              'Конкуренты': competitors,
-              'Цель карточек': goal,
-              'Тональность': tone,
-              'Характер бренда': brand,
-              'Карточка A': [{ url: aData.url }],
-              'Карточка B': [{ url: bData.url }]
+              name: name,
+              email: email,
+              gender: gender,
+              age: age,
+              income: income,
+              interests: interests,
+              location: locationVal,
+              product: product,
+              competitors: competitors,
+              goal: goal,
+              tone: tone,
+              brand_character: brand_character,
+              card_a: [{ url: aData.url }],
+              card_b: [{ url: bData.url }]
             }
           }]
         };
