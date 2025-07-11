@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Отправка данных</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    UPLOADCARE_PUBLIC_KEY = 'demopublickey';
+  </script>
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
 </head>
 <body class="bg-white text-gray-900 font-sans p-8">
   <h1 class="text-3xl font-bold mb-4">Отправить данные клиента</h1>
@@ -72,12 +76,12 @@
     <section>
       <h2 class="text-xl font-bold mb-2">Загрузка карточек</h2>
       <div class="mb-4">
-        <label for="card_a" class="block mb-1">Карточка A</label>
-        <input type="file" id="card_a" name="card_a" accept="image/*" required class="w-full border rounded p-2">
+        <label class="block mb-1">Карточка A</label>
+        <input type="hidden" role="uploadcare-uploader" name="cardA" data-clearable />
       </div>
       <div class="mb-4">
-        <label for="card_b" class="block mb-1">Карточка B</label>
-        <input type="file" id="card_b" name="card_b" accept="image/*" required class="w-full border rounded p-2">
+        <label class="block mb-1">Карточка B</label>
+        <input type="hidden" role="uploadcare-uploader" name="cardB" data-clearable />
       </div>
     </section>
 
@@ -104,8 +108,8 @@
       const tone = get('tone');
       const brand_character = get('brand_character');
 
-      const cardAFile = document.getElementById('card_a').files[0];
-      const cardBFile = document.getElementById('card_b').files[0];
+      const cardAUrl = form.cardA.value;
+      const cardBUrl = form.cardB.value;
       const message = document.getElementById('message');
       message.className = 'mt-4 hidden';
 
@@ -113,44 +117,28 @@
       const baseId = 'appE0enoPi7oPUy5g';
       const tableId = 'tbl5GTrO0C8kYtIuz';
 
-      async function uploadAttachment(file) {
-        const fd = new FormData();
-        fd.append('file', file, file.name);
-        const res = await fetch(`https://api.airtable.com/v0/bases/${baseId}/attachments`, {
-          method: 'POST',
-          headers: { 'Authorization': `Bearer ${token}` },
-          body: fd
-        });
-        if (!res.ok) throw new Error('File upload failed');
-        return res.json();
-      }
-
       try {
-        const [aData, bData] = await Promise.all([
-          uploadAttachment(cardAFile),
-          uploadAttachment(cardBFile)
-        ]);
-
         const payload = {
           records: [{
             fields: {
-              name: name,
-              email: email,
-              gender: gender,
-              age: age,
-              income: income,
-              interests: interests,
-              location: locationVal,
-              product: product,
-              competitors: competitors,
-              goal: goal,
-              tone: tone,
-              brand_character: brand_character,
-              card_a: [{ url: aData.url }],
-              card_b: [{ url: bData.url }]
+              'Имя клиента': name,
+              'Email': email,
+              'Пол клиента': gender,
+              'Возраст': age,
+              'Доход': income,
+              'Интересы': interests,
+              'География': locationVal,
+              'Продукт': product,
+              'Конкуренты': competitors,
+              'Цель карточек': goal,
+              'Тональность': tone,
+              'Характер бренда': brand_character,
+              'Карта A': [{ url: cardAUrl }],
+              'Карта B': [{ url: cardBUrl }]
             }
           }]
         };
+        console.log('Payload:', payload);
 
         const resp = await fetch(`https://api.airtable.com/v0/${baseId}/${tableId}`, {
           method: 'POST',
@@ -161,9 +149,11 @@
           body: JSON.stringify(payload)
         });
 
+        const respData = await resp.json();
+        console.log('Airtable response:', respData);
         if (!resp.ok) throw new Error('Request failed');
 
-        message.textContent = '🎉 Данные успешно отправлены!';
+        message.textContent = '🎉 Спасибо! Всё отправлено успешно';
         message.className = 'mt-4 text-green-600';
         form.reset();
       } catch (err) {
