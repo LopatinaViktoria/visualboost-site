@@ -22,48 +22,35 @@
       <input type="email" id="email" required class="w-full border rounded p-2">
     </div>
     <div>
-      <label for="cardA" class="block mb-1">Карта A:</label>
-      <input type="file" id="cardA" accept="image/*" required class="w-full">
+      <label for="cardA" class="block mb-1">Ссылка на карту A:</label>
+      <input type="url" id="cardA" placeholder="https://" required class="w-full border rounded p-2">
     </div>
     <div>
-      <label for="cardB" class="block mb-1">Карта B:</label>
-      <input type="file" id="cardB" accept="image/*" required class="w-full">
+      <label for="cardB" class="block mb-1">Ссылка на карту B:</label>
+      <input type="url" id="cardB" placeholder="https://" required class="w-full border rounded p-2">
     </div>
     <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">Отправить</button>
   </form>
   <p id="message" class="mt-4 text-green-600 hidden">Данные успешно отправлены!</p>
 
   <script>
-    function readFileAsDataUrl(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
     document.getElementById('clientForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
-      const cardA = document.getElementById('cardA').files[0];
-      const cardB = document.getElementById('cardB').files[0];
+      const cardAUrl = document.getElementById('cardA').value.trim();
+      const cardBUrl = document.getElementById('cardB').value.trim();
       const message = document.getElementById('message');
       message.classList.add('hidden');
 
       try {
-        const [cardAUrl, cardBUrl] = await Promise.all([
-          readFileAsDataUrl(cardA),
-          readFileAsDataUrl(cardB)
-        ]);
-
         const payload = {
           records: [{
             fields: {
-              fldaUiQ39NYvxUMcVysXUc: name,
-              flduf4AsnhGYBbihrYBBihr: email,
-              fldpA6ksdc76ODrDft: [{ url: cardAUrl }],
-              fldJ5vvb0DHnNwvrdK: [{ url: cardBUrl }]
+              "Name": name,
+              "Email": email,
+              "Card A": [{ url: cardAUrl }],
+              "Card B": [{ url: cardBUrl }]
             }
           }]
         };
@@ -72,7 +59,7 @@
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Bearer VisualBoostToken'
+              'Authorization': 'Bearer patvJS0DnoqPhKvNn.447d13a744908303e6e26d5434e55c96604325f7f1649618f89ac29749179235'
             },
             body: JSON.stringify(payload)
           });
@@ -81,6 +68,7 @@
 
         message.textContent = 'Данные успешно отправлены!';
         message.classList.remove('hidden');
+        e.target.reset();
       } catch (err) {
         message.textContent = 'Ошибка при отправке данных';
         message.classList.remove('text-green-600');
