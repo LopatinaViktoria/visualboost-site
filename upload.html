@@ -22,12 +22,20 @@
       <input type="email" id="email" required class="w-full border rounded p-2">
     </div>
     <div>
-      <label for="cardA" class="block mb-1">Ссылка на карту A:</label>
-      <input type="url" id="cardA" placeholder="https://" required class="w-full border rounded p-2">
+      <label for="audience" class="block mb-1">Целевая аудитория:</label>
+      <input type="text" id="audience" required class="w-full border rounded p-2">
     </div>
     <div>
-      <label for="cardB" class="block mb-1">Ссылка на карту B:</label>
-      <input type="url" id="cardB" placeholder="https://" required class="w-full border rounded p-2">
+      <label for="survey" class="block mb-1">Ответ на опрос:</label>
+      <textarea id="survey" required class="w-full border rounded p-2"></textarea>
+    </div>
+    <div>
+      <label for="cardA" class="block mb-1">Карта A:</label>
+      <input type="file" id="cardA" accept="image/*" required class="w-full border rounded p-2">
+    </div>
+    <div>
+      <label for="cardB" class="block mb-1">Карта B:</label>
+      <input type="file" id="cardB" accept="image/*" required class="w-full border rounded p-2">
     </div>
     <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">Отправить</button>
   </form>
@@ -38,31 +46,53 @@
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
-      const cardAUrl = document.getElementById('cardA').value.trim();
-      const cardBUrl = document.getElementById('cardB').value.trim();
+      const audience = document.getElementById('audience').value.trim();
+      const survey = document.getElementById('survey').value.trim();
+      const cardAFile = document.getElementById('cardA').files[0];
+      const cardBFile = document.getElementById('cardB').files[0];
       const message = document.getElementById('message');
       message.classList.add('hidden');
 
+      const token = 'patvJS0DnoqPhKvNn.447d13a744908303e6e26d5434e55c96604325f7f1649618f89ac29749179235';
+      const baseId = 'appE0enoPi7oPUy5g';
+      const tableId = 'tbl5GTrO0C8kYtIuz';
+
+      async function uploadAttachment(file) {
+        const fd = new FormData();
+        fd.append('file', file, file.name);
+        const res = await fetch(`https://api.airtable.com/v0/bases/${baseId}/attachments`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${token}` },
+          body: fd
+        });
+        if (!res.ok) throw new Error('File upload failed');
+        return res.json();
+      }
+
       try {
+        const [aData, bData] = await Promise.all([uploadAttachment(cardAFile), uploadAttachment(cardBFile)]);
+
         const payload = {
           records: [{
             fields: {
-              "Name": name,
-              "Email": email,
-              "Card A": [{ url: cardAUrl }],
-              "Card B": [{ url: cardBUrl }]
+              flduaiQi39NYvxlwCvxMC: name,
+              flduf4asnHGyBBihr: email,
+              jJhi16cs: audience,
+              fldWewtaECoe8CDcx: survey,
+              fldPa6ksdc76ODrDft: [{ url: aData.url }],
+              fldJSvvb0DHnwvrdK: [{ url: bData.url }]
             }
           }]
         };
 
-          const resp = await fetch('https://api.airtable.com/v0/appE0enoPi7oPUy5g/tbl5GTrO0C8kYtIuz', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer patvJS0DnoqPhKvNn.447d13a744908303e6e26d5434e55c96604325f7f1649618f89ac29749179235'
-            },
-            body: JSON.stringify(payload)
-          });
+        const resp = await fetch(`https://api.airtable.com/v0/${baseId}/${tableId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        });
 
         if (!resp.ok) throw new Error('Request failed');
 
